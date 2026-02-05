@@ -9,11 +9,10 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const [tasks, setTasks] = useState([])
 
-  useEffect(()=>{
-    fetchData();
-  },[]);
+  
 
   const fetchData = async() =>{
+    
     try {
       const response = await fetch("http://localhost:3000/tasks");
       const data = await response.json();
@@ -22,6 +21,13 @@ const Dashboard = () => {
       console.log(error)
     }
   };
+  useEffect(()=>{
+    console.log('called after API',tasks)
+  },[tasks])
+  useEffect(()=>{
+    fetchData();
+  },[])
+  
 
   const handleLogout = () => {
     console.log('click from dashboard')
@@ -33,7 +39,7 @@ const Dashboard = () => {
   return (
     <div>
       <Navbar title="Task Management" onLogout={handleLogout}/>
-      <h1> Hello </h1>
+      <h1> MY TASKS</h1>
       <TaskList tasks={tasks} />
     </div>
   )
