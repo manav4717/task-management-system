@@ -1,17 +1,22 @@
-import { Navigate } from "react-router-dom";
-import React from "react";
+import { Navigate }  from "react-router-dom"
 
-const AuthGuard = ({ children, required = true, redirect = "/login" }) => {
-  const formData = JSON.parse(localStorage.getItem("loginData"));
-  const isAuthenticated = !!formData;
+const AuthGuard = ({
+    children,
+    required = true,
+    redirect = "/Login"
+}) => {
+  const loginData = JSON.parse(localStorage.getItem("loginData"));
+  const isAuthenticated = !!loginData;
+  
+  if (required && !isAuthenticated){
+    return <Navigate to={redirect} replace/>
+  }
 
-  if (required && !isAuthenticated) {
-    return <Navigate to={redirect} replace />;
+  if (!required && isAuthenticated){
+    return <Navigate to="/dashboard" replace/>
   }
-  if (!required && isAuthenticated) {
-    return <Navigate to="/daskbord" replace />;
-  }
+
   return children;
 };
 
-export default AuthGuard;
+export default AuthGuard

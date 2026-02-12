@@ -5,12 +5,14 @@ const TaskForm = ({ addTask, updateTask, editingTask }) => {
     title: "",
     description: "",
     dueDate: "",
-    priority: "",
+    priority: "Low",
   });
   const [errors, setErrors] = useState({});
+
   useEffect(() => {
     setFormData(editingTask);
   }, [editingTask]);
+
   const validate = () => {
     const newErrors = {};
 
@@ -65,7 +67,7 @@ const TaskForm = ({ addTask, updateTask, editingTask }) => {
       title: "",
       description: "",
       dueDate: "",
-      priority: "",
+      priority: "Low",
     });
   };
 
@@ -101,10 +103,10 @@ const TaskForm = ({ addTask, updateTask, editingTask }) => {
               <input
                 type="date"
                 value={formData?.dueDate}
-                name="date"
+                name="dueDate"
                 onChange={handleInputChange}
               />
-              {errors.date && (
+              {errors.dueDate && (
                 <span className="error-msg">{errors.dueDate}</span>
               )}
             </div>
